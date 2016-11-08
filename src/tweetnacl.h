@@ -51,8 +51,8 @@ typedef i64 gf[16];
 #ifdef __cplusplus
 extern "C" {
 #endif
-void randombytes (unsigned char *, unsigned long long);
-int randombytes_close (void);
+void random_bytes (unsigned char *, unsigned long long);
+int random_bytes_close (void);
 
 int crypto_box_keypair(u8 *y,u8 *x);
 int crypto_box_afternm(u8 *c,const u8 *m,u64 d,const u8 *n,const u8 *k);

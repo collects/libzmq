@@ -95,7 +95,7 @@ zmq::ctx_t::ctx_t () :
 #if defined (ZMQ_USE_TWEETNACL)
     // allow opening of /dev/urandom
     unsigned char tmpbytes[4];
-    randombytes(tmpbytes, 4);
+    random_bytes(tmpbytes, 4);
 #elif defined (ZMQ_USE_LIBSODIUM)
     int rc = sodium_init ();
     zmq_assert (rc != -1);
@@ -134,7 +134,7 @@ zmq::ctx_t::~ctx_t ()
     //  If we've done any Curve encryption, we may have a file handle
     //  to /dev/urandom open that needs to be cleaned up.
 #ifdef ZMQ_HAVE_CURVE
-    randombytes_close ();
+    random_bytes_close ();
 #endif
 
     //  Remove the tag, so that the object is considered dead.

@@ -329,7 +329,7 @@ int zmq::curve_client_t::produce_initiate (msg_t *msg_)
     memcpy (vouch_plaintext + crypto_box_ZEROBYTES + 32, server_key, 32);
 
     memcpy (vouch_nonce, "VOUCH---", 8);
-    randombytes (vouch_nonce + 8, 16);
+    random_bytes (vouch_nonce + 8, 16);
 
     int rc = crypto_box (vouch_box, vouch_plaintext,
                          sizeof vouch_plaintext,

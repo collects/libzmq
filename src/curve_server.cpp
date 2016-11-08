@@ -329,7 +329,7 @@ int zmq::curve_server_t::produce_welcome (msg_t *msg_)
     //  Create full nonce for encryption
     //  8-byte prefix plus 16-byte random nonce
     memcpy (cookie_nonce, "COOKIE--", 8);
-    randombytes (cookie_nonce + 8, 16);
+    random_bytes (cookie_nonce + 8, 16);
 
     //  Generate cookie = Box [C' + s'](t)
     memset (cookie_plaintext, 0, crypto_secretbox_ZEROBYTES);
@@ -339,7 +339,7 @@ int zmq::curve_server_t::produce_welcome (msg_t *msg_)
             cn_secret, 32);
 
     //  Generate fresh cookie key
-    randombytes (cookie_key, crypto_secretbox_KEYBYTES);
+    random_bytes (cookie_key, crypto_secretbox_KEYBYTES);
 
     //  Encrypt using symmetric cookie key
     int rc = crypto_secretbox (cookie_ciphertext, cookie_plaintext,
@@ -354,7 +354,7 @@ int zmq::curve_server_t::produce_welcome (msg_t *msg_)
     //  Create full nonce for encryption
     //  8-byte prefix plus 16-byte random nonce
     memcpy (welcome_nonce, "WELCOME-", 8);
-    randombytes (welcome_nonce + 8, crypto_box_NONCEBYTES - 8);
+    random_bytes (welcome_nonce + 8, crypto_box_NONCEBYTES - 8);
 
     //  Create 144-byte Box [S' + cookie](S->C')
     memset (welcome_plaintext, 0, crypto_box_ZEROBYTES);
